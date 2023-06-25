@@ -1,0 +1,59 @@
+/* Basic Style */
+
+body {
+	color: #333;
+	font-family: Lato, sans-serif;
+	background-color: #e4e4e4;
+	box-sizing: border-box;
+}
+
+h1 {
+	margin: 5px 10px 10px;
+	text-align: center;
+}
+
+.container {
+	display: block;
+	margin: 10px auto 100px;
+	background-color: #fff;
+	padding: 5px 10px 10px 10px;
+	border-radius: 10px
+}
+
+p {
+	margin: 0;
+}
+
+fieldset {
+	margin-top: 10px;
+	border-radius: 7px;
+}
+
+legend {
+	font-weight: bold;
+}
+
+input[type="number"] {
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+label {
+	width: 110px;
+	float: left;
+}
+
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	align-content: center;
+	flex-wrap: wrap;
+}
+
+/* responsive */
+@media (min-width: 576px) {
+	.container {
+		width: 400px;
+	}
+}
