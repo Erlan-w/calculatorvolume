@@ -33,8 +33,6 @@ tmbField.onclick = ( e ) => {
 	e.preventDefault();
 }
 
-let hasVal = [];
-
 var bindTaskEvents = function ( taskListItem ) {
 	// console.log( "Bind list item events" );
 
@@ -44,7 +42,7 @@ var bindTaskEvents = function ( taskListItem ) {
 	let jumPal = taskListItem.querySelector( 'input#jumPal' );
 	let hasil = taskListItem.querySelector( 'input#hasil' );
 
-	console.log( taskListItem );
+	// console.log( taskListItem );
 
 
 
@@ -55,7 +53,6 @@ var bindTaskEvents = function ( taskListItem ) {
 		let valJumPal = jumPal.value;
 
 		hasil.value = valIsPal * valJumPal;
-		hasVal.push( hasil.value );
 	}
 
 }
@@ -77,16 +74,23 @@ for ( var i = 0; i < form.children.length; i++ ) {
 let totBtn = document.querySelector( 'button#totBtn' );
 let totHas = document.getElementById( 'totHas' );
 
-let hasil = 0;
+let hasVal = [];
 
 totBtn.onclick = () => {
 
 	// cycle for total hasil
+
+	for ( let m = 0; m < form.children.length; m++ ) {
+		hasVal.push( form.children[m].children[3].children[1].value );
+
+	}
+	let hasil = 0;
+
 	for ( let j = 0; j < hasVal.length; j++ ) {
 		hasil += parseInt( hasVal[j] );
 	}
 
-	console.log( hasil );
+	// console.log( hasil );
 	// console.log( taskListItem );
 	totHas.innerText = hasil;
 }
