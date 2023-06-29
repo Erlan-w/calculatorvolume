@@ -44,8 +44,6 @@ var bindTaskEvents = function ( taskListItem ) {
 
 	// console.log( taskListItem );
 
-
-
 	//bind deleteTask to delete button
 	// fungsi hitung pertempat
 	jumPal.onkeyup = () => {
@@ -54,7 +52,6 @@ var bindTaskEvents = function ( taskListItem ) {
 
 		hasil.value = valIsPal * valJumPal;
 	}
-
 }
 
 
@@ -63,10 +60,8 @@ for ( var i = 0; i < form.children.length; i++ ) {
 
 	//bind events to list item's children (taskCompleted)
 	bindTaskEvents( form.children[i] );
-
 	// console.log( form.children[i] );
 }
-
 
 // total
 
@@ -74,27 +69,17 @@ for ( var i = 0; i < form.children.length; i++ ) {
 let totBtn = document.querySelector( 'button#totBtn' );
 let totHas = document.getElementById( 'totHas' );
 
-let hasVal = [];
-
 totBtn.onclick = () => {
+	let hasil = 0;
 
 	// cycle for total hasil
 
 	for ( let m = 0; m < form.children.length; m++ ) {
-		hasVal.push( form.children[m].children[3].children[1].value );
-
-	}
-	let hasil = 0;
-
-	for ( let j = 0; j < hasVal.length; j++ ) {
-		hasil += parseInt( hasVal[j] );
+		hasil += parseInt( form.children[m].children[3].children[1].value );
+		// console.log( form.children[m].children[3].children[1].value );
 	}
 
 	// console.log( hasil );
-	// console.log( taskListItem );
 	totHas.innerText = hasil;
 }
 	// }
-
-
-
