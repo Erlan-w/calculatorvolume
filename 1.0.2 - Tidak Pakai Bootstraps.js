@@ -1,11 +1,38 @@
 let form = document.getElementById( 'form' );
 let tmbField = document.getElementById( 'tmbField' );
 
+// tampilan awal
+let tampilanAwal = () => {
+	let fieldsetAwal = document.createElement( 'fieldset' );
+	let isiTampAwal = `
+					<legend>Tempat 1</legend>
+					<p class="col-auto">
+						<label for="isPal">Isi/ Palet :</label>
+						<input type="number" name="isPal" id="isPal" value="36" />
+					</p>
+
+					<p class="col-auto">
+						<label for="jumPal" class="form-label">Jumlah Palet : </label>
+						<input type="number" name="jumPal" id="jumPal" class="form-control" />
+					</p>
+					<p><label for="hasil">Hasil: </label>
+						<input type="number" name="hasil" id="hasil" disabled />
+					</p>
+`;
+
+	fieldsetAwal.id = 'tmp_' + 1;
+	fieldsetAwal.innerHTML = isiTampAwal;
+
+	form.appendChild( fieldsetAwal );
+}
+
+tampilanAwal();
+
 // tambah field
 let k = 2;
 tmbField.onclick = ( e ) => {
-	let fieldset = document.createElement( 'fieldset' );
 	let isPal = document.getElementById( 'isPal' );
+	let fieldset = document.createElement( 'fieldset' );
 
 
 	let isi = `
@@ -17,7 +44,7 @@ tmbField.onclick = ( e ) => {
 
 					<p>
 						<label for="jumPal" class="form-label">Jumlah Palet : </label>
-						<input type="number" name="jumPal" id="jumPal" class="form-control" onkeyup="hitung()" />
+						<input type="number" name="jumPal" id="jumPal" class="form-control" />
 					</p>
 					<p><label for="hasil">Hasil: </label>
 						<input type="number" name="hasil" id="hasil" disabled />
@@ -52,6 +79,7 @@ var bindTaskEvents = function ( taskListItem ) {
 
 		hasil.value = valIsPal * valJumPal;
 	}
+
 }
 
 
@@ -82,4 +110,31 @@ totBtn.onclick = () => {
 	// console.log( hasil );
 	totHas.innerText = hasil;
 }
-	// }
+// }
+
+// menambahkan tombol reset
+let resetBtn = document.getElementById( 'reset' );
+
+resetBtn.onclick = () => {
+	// Hapus semua fieldset tambahan kecuali fieldset awal
+	for ( let i = form.children.length - 1; i > 0; i-- ) {
+		form.removeChild( form.children[i] );
+	}
+
+	// Reset nilai input fieldset awal
+	let fieldsetAwal = form.children[0];
+	let isPalInput = fieldsetAwal.querySelector( '#isPal' );
+	let jumPalInput = fieldsetAwal.querySelector( '#jumPal' );
+	let hasilInput = fieldsetAwal.querySelector( '#hasil' );
+
+	isPalInput.value = '36';
+	jumPalInput.value = '';
+	hasilInput.value = '';
+
+	// Reset nilai variabel k
+	k = 2;
+
+	// Reset total hasil
+	totHas.innerText = '';
+};
+
