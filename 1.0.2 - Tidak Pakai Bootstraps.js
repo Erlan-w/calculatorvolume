@@ -37,6 +37,7 @@ let k = 2;
 tmbField.onclick = ( e ) => {
 	let isPal = document.getElementById( 'isPal' );
 	let fieldset = document.createElement( 'fieldset' );
+	let isPack = document.getElementById( 'isPack' );
 
 
 	let isi = `
@@ -52,7 +53,7 @@ tmbField.onclick = ( e ) => {
 					</p>
 					<p>
 						<label for="isPack" class="form-label">Isi /pack : </label>
-						<input type="number" name="isPack" id="isPack" class="form-control" value="${isPack.value}"/>
+						<input type="number" name="isPack" id="isPack" value="${isPack.value}" />
 					</p>
 					<p><label for="hasil">Hasil: </label>
 						<input type="number" name="hasil" id="hasil" disabled />
