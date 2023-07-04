@@ -15,6 +15,10 @@ let tampilanAwal = () => {
 						<label for="jumPal" class="form-label">Jumlah Palet : </label>
 						<input type="number" name="jumPal" id="jumPal" class="form-control" />
 					</p>
+					<p>
+						<label for="isPack" class="form-label">Isi /pack : </label>
+						<input type="number" name="isPack" id="isPack" class="form-control" value="1000"/>
+					</p>
 					<p><label for="hasil">Hasil: </label>
 						<input type="number" name="hasil" id="hasil" disabled />
 					</p>
@@ -46,6 +50,10 @@ tmbField.onclick = ( e ) => {
 						<label for="jumPal" class="form-label">Jumlah Palet : </label>
 						<input type="number" name="jumPal" id="jumPal" class="form-control" />
 					</p>
+					<p>
+						<label for="isPack" class="form-label">Isi /pack : </label>
+						<input type="number" name="isPack" id="isPack" class="form-control" value="${isPack.value}"/>
+					</p>
 					<p><label for="hasil">Hasil: </label>
 						<input type="number" name="hasil" id="hasil" disabled />
 					</p>
@@ -67,6 +75,7 @@ var bindTaskEvents = function ( taskListItem ) {
 	// let delBtn = taskListItem.querySelector( "button.btn" );
 	let isPal = taskListItem.querySelector( 'input#isPal' );
 	let jumPal = taskListItem.querySelector( 'input#jumPal' );
+	let isPack = taskListItem.querySelector( 'input#isPack' );
 	let hasil = taskListItem.querySelector( 'input#hasil' );
 
 	// console.log( taskListItem );
@@ -76,8 +85,9 @@ var bindTaskEvents = function ( taskListItem ) {
 	jumPal.onkeyup = () => {
 		let valIsPal = isPal.value;
 		let valJumPal = jumPal.value;
+		let valIsPack = isPack.value;
 
-		hasil.value = valIsPal * valJumPal;
+		hasil.value = ( valIsPal * valJumPal ) * valIsPack;
 	}
 
 }
@@ -89,6 +99,23 @@ for ( var i = 0; i < form.children.length; i++ ) {
 	//bind events to list item's children (taskCompleted)
 	bindTaskEvents( form.children[i] );
 	// console.log( form.children[i] );
+}
+
+// format tampilan total
+function formatAngka( angka ) {
+	var angkaString = angka.toString();
+	var hasil = "";
+
+	for ( var i = angkaString.length - 1; i >= 0; i-- ) {
+		var digit = angkaString.charAt( i );
+		hasil = digit + hasil;
+
+		if ( ( angkaString.length - i ) % 3 === 0 && i !== 0 ) {
+			hasil = "." + hasil;
+		}
+	}
+
+	return hasil;
 }
 
 // total
@@ -103,12 +130,12 @@ totBtn.onclick = () => {
 	// cycle for total hasil
 
 	for ( let m = 0; m < form.children.length; m++ ) {
-		hasil += parseInt( form.children[m].children[3].children[1].value );
+		hasil += parseInt( form.children[m].children[4].children[1].value );
 		// console.log( form.children[m].children[3].children[1].value );
 	}
 
 	// console.log( hasil );
-	totHas.innerText = hasil;
+	totHas.innerText = formatAngka( hasil );
 }
 // }
 
@@ -125,10 +152,12 @@ resetBtn.onclick = () => {
 	let fieldsetAwal = form.children[0];
 	let isPalInput = fieldsetAwal.querySelector( '#isPal' );
 	let jumPalInput = fieldsetAwal.querySelector( '#jumPal' );
+	let isPackInput = fieldsetAwal.querySelector( '#isPack' );
 	let hasilInput = fieldsetAwal.querySelector( '#hasil' );
 
 	isPalInput.value = '36';
 	jumPalInput.value = '';
+	// isPackInput.value = '1000';
 	hasilInput.value = '';
 
 	// Reset nilai variabel k
